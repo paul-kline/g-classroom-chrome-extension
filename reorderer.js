@@ -49,8 +49,10 @@ function orderColumns(instructionArr) {
   }
 }
 function addNums() {
+  console.log("in addNums");
   const thead = document.querySelector("thead");
   const len = thead.querySelectorAll("th").length;
+  console.log("thead length:", len);
   const tr = document.createElement("tr");
   for (let i = 0; i < len; i++) {
     const td = document.createElement("td");
@@ -84,5 +86,33 @@ function addNums() {
     tr.appendChild(td);
   }
   thead.appendChild(tr);
+  console.log("addNums done");
 }
 let fromtd;
+
+function init() {
+  addNums();
+}
+console.log("reordered running");
+
+window.addEventListener("load", (event) => {
+  console.log("page is fully loaded");
+  function addListener() {
+    const e = document.querySelector('[guidedhelpid="gradebookTab"]');
+    if (e) {
+      e.addEventListener("click", () => {
+        console.log("clicked");
+        setTimeout(() => {
+          const header = document.querySelector("thead");
+          if (header.querySelectorAll("td").length > 0) return;
+          setTimeout(addNums, 100);
+        }, 100);
+      });
+      console.log("listener added");
+    } else {
+      console.log("not yet");
+      setTimeout(addListener, 500);
+    }
+  }
+  addListener();
+});

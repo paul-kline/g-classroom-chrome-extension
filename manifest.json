@@ -1,0 +1,14 @@
+{
+  "name": "Google Classroom Grade Column Reorder",
+  "version": "0.0.1",
+  "description": "Allows you to reorder the grade columns in each of your google classroom classes.",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": ["https://classroom.google.com/*"],
+      "run_at": "document_idle",
+      "js": ["reorderer.js"]
+    }
+  ],
+  "permissions": ["storage"]
+}
